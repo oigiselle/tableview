@@ -18,9 +18,14 @@ class MovieListMainTVC: UITableViewController {
      
     }
     
+   
+   
+    
     override func viewDidAppear(_ animated: Bool) {
-        let _ = movies.moviesArr
+       
+        movies.moviesArr.append(movies.list())
         tableView.reloadData()
+        
         
     }
 

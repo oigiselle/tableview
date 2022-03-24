@@ -22,13 +22,10 @@ class MoviesStorage {
     let key = "list"
     
     
-    
-    
-    
     func save(movie: String){
         
         //call previous information
-        moviesArr = list()
+        moviesArr.append(list())
         
         // save movie
         moviesArr.append(movie)
@@ -40,12 +37,15 @@ class MoviesStorage {
         
     }
     
-    func list() -> Array<String>{
+    func list() -> String{
         
         let list = UserDefaults.standard.object(forKey: key)
         
-        return list as! Array<String>
-        
+        if list != nil{
+        return list as! String
+        } else {
+            return ""
+        }
     }
     
 }

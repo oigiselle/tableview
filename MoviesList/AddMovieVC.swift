@@ -23,6 +23,7 @@ class AddMovieVC: UIViewController {
             movie.save(movie: movieName)
         movieTextField.text = ""
         movieAdded.text = "Your movie has been successfully added!"
+          
          
           
         }
