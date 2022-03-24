@@ -9,43 +9,40 @@ import UIKit
 
 class MoviesStorage {
     
-    var moviesArr: [String] = [
-        "Eternals"
-        , "Dune"
-        ,"No Time To Die"
-        ,"Last Night in Soho"
-        ,"Ron’s Done Wrong"
-        ,"Halloween Kills","Venom","Antlers"
-        , "The Addams Family 2"
+
+    let keymovie = "movie"
+    
+      
+    var movies: [String] =
+    ["Eternals"
+    , "Dune"
+    ,"No Time To Die"
+    ,"Last Night in Soho"
+    ,"Ron’s Done Wrong"
+    ,"Halloween Kills"
+    ,"Venom"
+    ,"Antlers"
+    ,"The Addams Family 2"
     ]
-    
-    let key = "list"
-    
-    
-    func save(movie: String){
-        
-        //call previous information
-        moviesArr.append(list())
-        
-        // save movie
-        moviesArr.append(movie)
-        UserDefaults.standard.set(movie, forKey: key)
-        
-        
-        
-        print(moviesArr)
-        
-    }
-    
-    func list() -> String{
-        
-        let list = UserDefaults.standard.object(forKey: key)
-        
-        if list != nil{
-        return list as! String
-        } else {
-            return ""
-        }
-    }
-    
+       
+       func save(movie: String) {
+           movies = listmovies()
+           movies.append(movie)
+           UserDefaults.standard.setValue(movies, forKey: keymovie)
+       }
+       
+       func listmovies() -> Array<String> {
+           if let data = UserDefaults.standard.object(forKey: keymovie) {
+               return data as! Array<String>
+           }
+           return []
+       }
+       
+       func delete(index: Int) {
+           movies = listmovies()
+           movies.remove(at: index)
+           print(movies)
+           UserDefaults.standard.setValue(movies, forKey: keymovie)
+       }
 }
+

@@ -7,7 +7,13 @@
 
 import UIKit
 
+
+
 class AddMovieVC: UIViewController {
+    
+    static var identifier = String(describing: AddMovieVC.self)
+    
+    var moviesArr: [String] = []
     
     @IBOutlet weak var movieAdded: UILabel!
     @IBOutlet weak var movieTextField: UITextField!
@@ -17,13 +23,16 @@ class AddMovieVC: UIViewController {
 
     @IBAction func addMovie(_ sender: Any) {
         
-        if let movieName = movieTextField.text{
+        if var movieName = movieTextField.text{
         
         let movie = MoviesStorage()
             movie.save(movie: movieName)
-        movieTextField.text = ""
-        movieAdded.text = "Your movie has been successfully added!"
-          
+        
+            movieName = ""
+            movieTextField.text = ""
+            movieAdded.text = "Your movie has been successfully added!"
+            let data = movie.listmovies()
+            print (data)
          
           
         }
@@ -37,14 +46,7 @@ class AddMovieVC: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
-    */
-
 }

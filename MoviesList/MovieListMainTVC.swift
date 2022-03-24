@@ -8,53 +8,73 @@
 import UIKit
 
 class MovieListMainTVC: UITableViewController {
-            
-    var movies = MoviesStorage()
+    
+    
+    var movies: [String] =
+    ["Eternals"
+    , "Dune"
+    ,"No Time To Die"
+    ,"Last Night in Soho"
+    ,"Ron’s Done Wrong"
+    ,"Halloween Kills"
+    ,"Venom"
+    ,"Antlers"
+    ,"The Addams Family 2"
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+            updateList()
+    }
+    
+    func updateList(){
+        let data = MoviesStorage()
+        movies = data.listmovies()
+        tableView.reloadData()
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+       
+        return 1
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       
+        return movies.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "movies", for: indexPath)
 
-     
+        cell.textLabel?.text = movies[indexPath.row]
+        
+
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete{
-            print("Delete")
+            let data = MoviesStorage()
+            
+           
+            data.delete(index: indexPath.row)
+            updateList()
         }
     }
    
    
     
-    override func viewDidAppear(_ animated: Bool) {
-       
-        movies.moviesArr.append(movies.list())
-        tableView.reloadData()
-        
-        
-    }
 
-    // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-       
-        return 1
-    }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return movies.moviesArr.count
-    }
 
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "movies", for: indexPath)
 
-        cell.textLabel?.text = movies.moviesArr[indexPath.row]
-        
-
-        return cell
-    }
     
 
     /*
