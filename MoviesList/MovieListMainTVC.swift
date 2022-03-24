@@ -19,7 +19,7 @@ class MovieListMainTVC: UITableViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        movies = movies.moviesArr.save()
+        let _ = movies.moviesArr
         tableView.reloadData()
         
     }
@@ -85,10 +85,4 @@ class MovieListMainTVC: UITableViewController {
     /*
     // MARK: - Navigation
      */
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var dst = segue.destination as! AddMovieVC
-    }
-
-
 }
