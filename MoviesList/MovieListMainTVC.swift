@@ -18,6 +18,11 @@ class MovieListMainTVC: UITableViewController {
      
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete{
+            print("Delete")
+        }
+    }
    
    
     
