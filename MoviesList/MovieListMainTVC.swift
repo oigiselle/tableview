@@ -7,28 +7,22 @@
 
 import UIKit
 
-class MovieListMainTVC: UITableViewController {
+class MovieListMainTVC: UITableViewController{
     
+    @IBOutlet var table: UITableView!
     
-    var movies: [String] =
-    ["Eternals"
-    , "Dune"
-    ,"No Time To Die"
-    ,"Last Night in Soho"
-    ,"Ron’s Done Wrong"
-    ,"Halloween Kills"
-    ,"Venom"
-    ,"Antlers"
-    ,"The Addams Family 2"]
-
+   
+    
+    var movies: [String] = []
 
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
+        table.delegate = self
+        table.dataSource = self
+       
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
             updateList()
         print(movies)
@@ -55,6 +49,7 @@ class MovieListMainTVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "movies", for: indexPath)
 
         cell.textLabel?.text = movies[indexPath.row]
+        cell.textLabel?.font = UIFont(name: "Arial", size: 22)
         
 
         return cell
@@ -66,54 +61,32 @@ class MovieListMainTVC: UITableViewController {
             newMovie.delete(index: indexPath.row)
             updateList()
         }
+        
     }
-   
-   
     
-
-
-
-
-    
-
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
         return true
+    
     }
-    */
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
+        movies.swapAt(sourceIndexPath.row, destinationIndexPath.row)
+        
+    }
+    
+    
+    
+    @IBAction func didTapSort(){
+        if table.isEditing{
+            table.isEditing = false
+        }else {
+            table.isEditing = true
+        }
+    }
 
-    /*
-    // MARK: - Navigation
-     */
+    
+
+    
+  
 }

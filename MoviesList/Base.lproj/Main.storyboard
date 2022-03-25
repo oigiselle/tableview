@@ -32,12 +32,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Movies List" id="2l8-oK-dMR">
+                        <barButtonItem key="leftBarButtonItem" title="Sort" id="C62-gP-p8W">
+                            <connections>
+                                <action selector="didTapSort" destination="N9b-ZC-kXL" id="TVV-2O-7qv"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="BmZ-zc-Z2S">
                             <connections>
                                 <segue destination="VeD-s6-R9h" kind="show" id="fLZ-vA-LTl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="table" destination="kQB-xe-dlT" id="rwf-PJ-334"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QPy-vc-W9b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
