@@ -14,16 +14,7 @@ class MoviesStorage {
     
       
     var movies: [String] =
-    ["Eternals"
-    , "Dune"
-    ,"No Time To Die"
-    ,"Last Night in Soho"
-    ,"Ron’s Done Wrong"
-    ,"Halloween Kills"
-    ,"Venom"
-    ,"Antlers"
-    ,"The Addams Family 2"
-    ]
+    []
        
        func save(movie: String) {
            movies = listmovies()
@@ -32,8 +23,8 @@ class MoviesStorage {
        }
        
        func listmovies() -> Array<String> {
-           if let data = UserDefaults.standard.object(forKey: keymovie) {
-               return data as! Array<String>
+           if let listMovie = UserDefaults.standard.object(forKey: keymovie) {
+               return listMovie as! Array<String>
            }
            return []
        }

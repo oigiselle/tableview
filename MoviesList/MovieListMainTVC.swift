@@ -19,21 +19,24 @@ class MovieListMainTVC: UITableViewController {
     ,"Halloween Kills"
     ,"Venom"
     ,"Antlers"
-    ,"The Addams Family 2"
-    ]
+    ,"The Addams Family 2"]
+
+
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
             updateList()
+        print(movies)
     }
     
     func updateList(){
-        let data = MoviesStorage()
-        movies = data.listmovies()
+        let newMovie = MoviesStorage()
+        movies = newMovie.listmovies()
         tableView.reloadData()
     }
     
@@ -59,10 +62,8 @@ class MovieListMainTVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete{
-            let data = MoviesStorage()
-            
-           
-            data.delete(index: indexPath.row)
+            let newMovie = MoviesStorage()
+            newMovie.delete(index: indexPath.row)
             updateList()
         }
     }

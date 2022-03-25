@@ -13,7 +13,17 @@ class AddMovieVC: UIViewController {
     
     static var identifier = String(describing: AddMovieVC.self)
     
-    var moviesArr: [String] = []
+    var movies: [String] =
+    
+    ["Eternals"
+    , "Dune"
+    ,"No Time To Die"
+    ,"Last Night in Soho"
+    ,"Ron’s Done Wrong"
+    ,"Halloween Kills"
+    ,"Venom"
+    ,"Antlers"
+    ,"The Addams Family 2"]
     
     @IBOutlet weak var movieAdded: UILabel!
     @IBOutlet weak var movieTextField: UITextField!
