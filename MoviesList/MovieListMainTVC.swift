@@ -13,25 +13,44 @@ class MovieListMainTVC: UITableViewController{
     
    
     
-    var movies: [String] = []
+    var movies: [String] = ["Eternals"
+                            , "Dune"
+                            ,"No Time To Die"
+                            ,"Last Night in Soho"
+                            ,"Ron’s Done Wrong"
+                            ,"Halloween Kills"
+                            ,"Venom"
+                            ,"Antlers"
+                            ,"The Addams Family 2"]
 
     
     override func viewDidLoad() {
-        super.viewDidLoad()
+        tableView.reloadData()
+
         table.delegate = self
         table.dataSource = self
+        
        
     }
 
     override func viewDidAppear(_ animated: Bool) {
-            updateList()
-        print(movies)
+        updateList()
+        super.viewDidLoad()
+
+        if let bundleID = Bundle.main.bundleIdentifier {
+        UserDefaults.standard.removePersistentDomain(forName: bundleID) }
     }
+    
     
     func updateList(){
         let newMovie = MoviesStorage()
-        movies = newMovie.listmovies()
+        movies += newMovie.listmovies()
+        let uniqueList = Array(Set(movies))
+        movies = uniqueList
+        movies = Array(movies)
         tableView.reloadData()
+        
+        
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -55,13 +74,17 @@ class MovieListMainTVC: UITableViewController{
         return cell
     }
     
+    
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete{
-            let newMovie = MoviesStorage()
-            newMovie.delete(index: indexPath.row)
-            updateList()
+            tableView.beginUpdates()
+            movies.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .none)
+            tableView.endUpdates()
         }
-        
+       
+      
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
